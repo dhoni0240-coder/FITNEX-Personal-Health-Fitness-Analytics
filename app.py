@@ -2,6 +2,26 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 
+from pathlib import Path
+import streamlit as st
+
+def load_css():
+    css_path = Path(__file__).parent / "assets" / "style.css"
+
+    with open(css_path, "r", encoding="utf-8") as file:
+        css = file.read()
+
+    st.html(f"<style>{css}</style>")
+
+
+st.set_page_config(
+    page_title="FITNEX | Fitness Analytics",
+    page_icon="💪",
+    layout="wide"
+)
+
+load_css()
+
 st.set_page_config(
     page_title="FITNEX | Fitness Analytics",
     page_icon="💪",

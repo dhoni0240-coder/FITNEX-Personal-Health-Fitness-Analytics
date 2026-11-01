@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --background: #101010;
+    --sidebar: #171717;
+    --card: #1d1d1d;
+    --border: #353535;
+    --primary: #9eff00;
+    --secondary: #a970ff;
+    --text: #ffffff;
+    --muted: #aaaaaa;
+}
+
+html,
+body,
+[class*="css"] {
+    font-family: 'Poppins', sans-serif;
+}
+
+.stApp {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+[data-testid="stDecoration"] {
+    display: none;
+}
+
+.block-container {
+    max-width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+[data-testid="stSidebar"] {
+    background-color: var(--sidebar);
+    border-right: 1px solid #292929;
+}
+
+[data-testid="stSidebar"] h1 {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+[data-testid="stSidebar"] p {
+    color: var(--muted);
+}
+
+div[data-testid="stSidebar"] div.stButton > button {
+    width: 100%;
+    background-color: #222222;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: left;
+    padding: 12px;
+    transition: 0.3s ease;
+}
+
+div[data-testid="stSidebar"] div.stButton > button:hover {
+    background-color: var(--primary);
+    color: #101010;
+    border-color: var(--primary);
+}
+
+.hero {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.20)
+        ),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 260px;
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid #383838;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    color: var(--text);
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: #dddddd;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 25px;
+    margin-bottom: 18px;
+}
+
+.metric-card {
+    background: linear-gradient(145deg, #262626, #191919);
+    border: 1px solid #383838;
+    border-radius: 17px;
+    padding: 22px;
+    min-height: 135px;
+    transition: 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+
+.metric-title {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.metric-value {
+    color: var(--text);
+    font-size: 27px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.metric-delta {
+    color: var(--primary);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.panel {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 20px;
+}
+
+.goal-card {
+    background-color: #222222;
+    border: 1px solid #383838;
+    border-radius: 15px;
+    padding: 18px;
+    text-align: center;
+}
+
+.activity-card {
+    background-color: #222222;
+    padding: 17px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #333333;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.activity-status {
+    float: right;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--text);
+}
+
+.stProgress > div > div > div > div {
+    background-color: var(--primary);
+}
+
+[data-testid="stMetric"] {
+    background-color: var(--card);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input {
+    background-color: #222222;
+    color: var(--text);
+    border: 1px solid #444444;
+    border-radius: 8px;
+}
+
+.stSelectbox div[data-baseweb="select"] {
+    background-color: #222222;
+}
+
+.stButton button {
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #444444;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+}
