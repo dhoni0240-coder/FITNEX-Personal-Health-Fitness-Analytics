@@ -8,9 +8,13 @@ from components.charts import (
     render_activity_chart,
     render_sleep_chart
 )
+from screens.authentication import render_authentication
 
 
+# ==========================================
 # PAGE CONFIGURATION
+# ==========================================
+
 st.set_page_config(
     page_title="FITNEX | Fitness Analytics",
     page_icon="💪",
@@ -19,7 +23,10 @@ st.set_page_config(
 )
 
 
+# ==========================================
 # LOAD CSS
+# ==========================================
+
 def load_css():
     css_path = Path(__file__).parent / "assets" / "style.css"
 
@@ -32,19 +39,29 @@ def load_css():
 load_css()
 
 
+# ==========================================
 # SESSION STATE
+# ==========================================
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if "user" not in st.session_state:
+    st.session_state.user = None
+
 if "user_name" not in st.session_state:
-    st.session_state.user_name = "Ashirvad"
+    st.session_state.user_name = "Guest"
+
+if "current_page" not in st.session_state:
+    st.session_state.current_page = "Dashboard"
 
 
-# SIDEBAR
-current_page = render_sidebar()
-
-
+# ==========================================
 # DASHBOARD PAGE
+# ==========================================
+
 def dashboard_page():
 
-    # HERO SECTION
     st.html(f"""
         <div class="hero">
             <h1>Welcome Back, <span>{st.session_state.user_name}!</span></h1>
@@ -53,9 +70,11 @@ def dashboard_page():
         </div>
     """)
 
-    # METRICS
-    st.markdown('<div class="section-title">Your Daily Overview</div>',
-                unsafe_allow_html=True)
+    # DAILY OVERVIEW
+    st.markdown(
+        '<div class="section-title">Your Daily Overview</div>',
+        unsafe_allow_html=True
+    )
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -91,9 +110,7 @@ def dashboard_page():
             "💧"
         )
 
-    st.markdown("")
-
-    # CHARTS
+    # FITNESS ANALYTICS
     st.markdown(
         '<div class="section-title">Fitness Analytics</div>',
         unsafe_allow_html=True
@@ -131,16 +148,11 @@ def dashboard_page():
         with column:
             progress = min(current / target, 1.0)
 
-            st.markdown(
-                f"### {icon} {name}",
-                unsafe_allow_html=True
-            )
+            st.markdown(f"### {icon} {name}")
 
             st.progress(progress)
 
-            st.caption(
-                f"{current} / {target}"
-            )
+            st.caption(f"{current} / {target}")
 
     # RECENT ACTIVITIES
     st.markdown(
@@ -166,7 +178,10 @@ def dashboard_page():
         """)
 
 
-# OTHER PAGES
+# ==========================================
+# PLACEHOLDER PAGES
+# ==========================================
+
 def placeholder_page(page_name):
 
     st.title(page_name)
@@ -176,20 +191,65 @@ def placeholder_page(page_name):
     )
 
 
-# PAGE ROUTING
-if current_page == "Dashboard":
-    dashboard_page()
+# ==========================================
+# LOGOUT FUNCTION
+# ==========================================
+
+def logout():
+
+    st.session_state.authenticated = False
+    st.session_state.user = None
+    st.session_state.user_name = "Guest"
+    st.session_state.current_page = "Dashboard"
+
+    st.rerun()
+
+
+# ==========================================
+# MAIN APPLICATION ROUTING
+# ==========================================
+
+if not st.session_state.authenticated:
+
+    render_authentication()
 
 else:
-    placeholder_page(current_page)
+
+    current_page = render_sidebar()
+
+    with st.sidebar:
+        st.markdown("---")
+
+        st.write(
+            f"Logged in as **{st.session_state.user_name}**"
+        )
+
+        if st.button(
+            "🚪 Logout",
+            use_container_width=True
+        ):
+            logout()
+
+    if current_page == "Dashboard":
+
+        dashboard_page()
+
+    else:
+
+        placeholder_page(current_page)
 
 
+# ==========================================
 # FOOTER
+# ==========================================
+
 st.markdown("---")
 
 st.markdown(
-    "<center style='color: #888888;'>"
-    "FITNEX © 2026 | Personal Health & Fitness Analytics"
-    "</center>",
+    """
+    <center style="color: #888888;">
+        FITNEX © 2026 | Personal Health & Fitness Analytics
+    </center>
+    """,
     unsafe_allow_html=True
 )
